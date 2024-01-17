@@ -23,7 +23,7 @@ def makeApp():
         endpoints,
         static_path=HTMLDIR
     )
-    app.listen(8001)
+    app.listen(8000)
     print("")
     print("Point your browser to http://localhost:8000")
     print("")
