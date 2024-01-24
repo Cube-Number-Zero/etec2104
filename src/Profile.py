@@ -1,5 +1,6 @@
 #src/Profile.py
 import tornado.web
+import os.path
 
 data = {
     "name": {
@@ -19,13 +20,20 @@ data = {
         "bob": "bob@bob.xyz",
         "carol": "carol@example.com",
         "dave": "dave@dave.dave"
+    },
+    "pfp": {
+        "alice": "/static/alicepfp.png",
+        "bob": "/static/bobpfp.png",
+        "carol": "/static/carolpfp.png",
+        "dave": "/static/davepfp.png"
     }
 }
 
 class Handler(tornado.web.RequestHandler):
     def get(self):
         p = self.request.path.split('/')[2]
-        self.render("Profile.html",
+        self.render(os.path.join(os.path.dirname(__file__), "..", "html", "Profile.html"),
                     name = data["name"][p],
                     dob = data["dob"][p],
-                    email = data["email"][p])
+                    email = data["email"][p],
+                    pfp = data["pfp"][p])

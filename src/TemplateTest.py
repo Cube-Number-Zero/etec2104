@@ -11,4 +11,4 @@ quotes = [
 class Handler(tornado.web.RequestHandler):
     def get(self):
         q = random.choice(quotes)
-        self.render( "TemplateTest.html", quotation=q )
+        self.render(os.path.join(os.path.dirname(__file__), "..", "html", "TemplateTest.html"), quotation = q)
