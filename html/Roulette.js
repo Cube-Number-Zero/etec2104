@@ -14,29 +14,31 @@ let table = document.getElementById("log");
 function spin() {
     index = Math.floor(Math.random() * 38);
     if (index == 0) {
-        number = "0,";
-        color = "Rouge,";
-        even = "Impair,";
+        number = "0";
+        color = "Rouge";
+        even = "Impair";
         size = "Manque";
     } else if (index == 19) {
-        number = "00,"
-        color = "Noir,";
-        even = "Pair,";
+        number = "00"
+        color = "Noir";
+        even = "Pair";
         size = "Passe";
     } else {
-        number = wheel[index].toString() + ",";
-        color = (index % 2 == 0) ? "Rouge," : "Noir,";
-        even = (wheel[index] % 2 == 0) ? "Pair," : "Impair,";
+        number = wheel[index].toString();
+        color = (index % 2 == 0) ? "Rouge" : "Noir";
+        even = (wheel[index] % 2 == 0) ? "Pair" : "Impair";
         size = (wheel[index] > 18) ? "Passe" : "Manque";
     }
-    /*let row = document.createElement("tr");
-    let cell1 = document.createElement("tr");
-    let cell2 = document.createElement("tr");
-    let cell3 = document.createElement("tr");
     let row = document.createElement("tr");
-    table.appendChild(row);*/
+    row.appendChild(table_cell(number));
+    row.appendChild(table_cell(color));
+    row.appendChild(table_cell(even));
+    row.appendChild(table_cell(size));
+    table.appendChild(row);
 }
 
-/*function table_cell(data) {
-    let cell1 = document.createElement("td");
-}*/
+function table_cell(data) {
+    let cell = document.createElement("td");
+    cell.appendChild(document.createTextNode(data));
+    return cell
+}
