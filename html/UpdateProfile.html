@@ -1,0 +1,18 @@
+<!--UpdateProfile.html-->
+<!DOCTYPE html>
+<HTML>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <table>
+            <tr><td>First Name: </td><td><input id="fname"></td></tr>
+            <tr><td>Last Name: </td><td><input id="lname"></td></tr>
+            <tr><td>Date of Birth: </td><td><input id="birthdate" type='date'></td></tr>
+            <tr><td>Profile pic: </td><td><input id="profile_pic" type="file"></td></tr>
+        </table>
+        <label class="filepicker" for="pic">You Must Choose…</label> <input style="display:none;" id='pic' type="file">
+        <button onclick="submit()">Submit</button>
+        <script src="/static/updateprofile.js"></script>
+    </body>
+</html>

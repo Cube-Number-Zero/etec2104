@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <!--html/Profile.html-->
+<!DOCTYPE html>
 <html>
     <head>
         <title>Profile</title>
@@ -13,6 +13,23 @@
                 <td>Name: {{name}}<br />DOB: {{dob}}<br />email: {{email}}<br /></td>
             </tr>
         </table>
-        </div>
+        <table>
+            <tr>
+                <td>Name: </td>
+                <td><input id="name"/></td>
+                <td><button onclick="submitName()">Submit</button></td>
+            </tr>
+            <tr>
+                <td>DOB: </td>
+                <td><input id="dob" type="date"/></td>
+                <td><button onclick="submitDOB()">Submit</button></td>
+            </tr>
+            <tr>
+                <td>Profile Picture: </td>
+                <td><input id="profile_pic" type="file"></td>
+                <td><button onclick="submitPicture()">Submit</button></td>
+            </tr>
+        </table>
+        <script src="/static/Profile.js"></script>
     </body>
 </html>

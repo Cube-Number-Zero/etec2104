@@ -1,6 +1,8 @@
 #src/Profile.py
 import tornado.web
 import os.path
+import json
+import base64
 
 data = {
     "name": {
@@ -36,4 +38,14 @@ class Handler(tornado.web.RequestHandler):
                     name = data["name"][p],
                     dob = data["dob"][p],
                     email = data["email"][p],
-                    pfp = data["pfp"][p])
+                    pfp = data["pfp"][p],
+                    user = p)
+        
+    def post(self):
+        J = json.loads(self.request.body)
+        name = J["name"]
+        dob = J["dob"]
+        ppic = base64.b64decode(J["pic"])
+        print("WE GOT:", name, dob, ppic[:20])
+        resp = {"ok": True}
+        self.write(json.dumps(resp))
