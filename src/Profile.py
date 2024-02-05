@@ -49,7 +49,7 @@ class Handler(tornado.web.RequestHandler):
             data["name"][p] = J["name"]
             print("WE GOT:", data["name"][p])
         if "dob" in J:
-            data["dob"][p] = J["dob"]
+            data["dob"][p] = J["dob"][5:]
             print("WE GOT:", data["dob"][p])
         if "pic" in J:
             data["pfp"][p] = J["pic"]

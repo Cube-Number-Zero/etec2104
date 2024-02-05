@@ -3,17 +3,20 @@
 
 function submitName() {
     let nameText = document.getElementById("name").value;
+    let user = document.getElementById("username").value;
     let J = {
         name: nameText,
     };
-    fetch( "/profile/alice",
+    fetch( "/profile/" + user,
         {   method: "POST",
             body: JSON.stringify(J)
         }
     ).then( (resp) => {
         //can also use text(), blob(), or arrayBuffer()
         resp.json().then( (J) => {
-            document.getElementById("nameDisplay").value = "Name: " + nameText;
+            let nameDisplay = document.getElementById("nameDisplay");
+            nameDisplay.removeChild(nameDisplay.firstChild);
+            nameDisplay.appendChild(document.createTextNode("Name: " + nameText));
             console.log("Server said:", J);
         });
     }).catch( (err) => {
@@ -22,24 +25,42 @@ function submitName() {
 }
 
 function submitDOB() {
+    let dobText = document.getElementById("dob").value;
+    let user = document.getElementById("username").value;
+    let J = {
+        dob: dobText,
+    };
+    fetch( "/profile/" + user,
+        {   method: "POST",
+            body: JSON.stringify(J)
+        }
+    ).then( (resp) => {
+        //can also use text(), blob(), or arrayBuffer()
+        resp.json().then( (J) => {
+            let dobDisplay = document.getElementById("dobDisplay");
+            dobDisplay.removeChild(dobDisplay.firstChild);
+            dobDisplay.appendChild(document.createTextNode("DOB: " + dobText));
+            console.log("Server said:", J);
+        });
+    }).catch( (err) => {
+        console.log("Uh oh",err);
+    })
+}
+
+function submitPicture() {
     let file = document.getElementById("profile_pic").files[0];
-    if(!file){
+    let user = document.getElementById("username").value;
+    if (!file) {
         console.log("No file!");
         return;
     }
     let R = new FileReader();
     R.addEventListener("load", () => {
         let profilepic = btoa(R.result);    //do base64 encoding
-        let fname = document.getElementById("fname").value;
-        let lname = document.getElementById("lname").value;
-        let dob = document.getElementById("birthdate").value;
         let J = {
-            firstName: fname,
-            lastName: lname,
-            birthDate: dob,
             pic: profilepic
         };
-        fetch( "/profile",
+        fetch( "/profile/" + user,
             {   method: "POST",
                 body: JSON.stringify(J)
             }
@@ -55,7 +76,7 @@ function submitDOB() {
     R.readAsBinaryString(file);
 }
 
-function submitPicture() {
+function submitOriginal() {
     let file = document.getElementById("profile_pic").files[0];
     if(!file){
         console.log("No file!");
