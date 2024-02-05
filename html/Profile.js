@@ -13,7 +13,8 @@ function submitName() {
     ).then( (resp) => {
         //can also use text(), blob(), or arrayBuffer()
         resp.json().then( (J) => {
-            console.log("Server said:",J);
+            document.getElementById("nameDisplay").value = "Name: " + nameText;
+            console.log("Server said:", J);
         });
     }).catch( (err) => {
         console.log("Uh oh",err);

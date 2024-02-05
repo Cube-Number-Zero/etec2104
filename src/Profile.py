@@ -4,6 +4,8 @@ import os.path
 import json
 import base64
 
+p = None
+
 data = {
     "name": {
         "alice": "Alice Smith",
@@ -43,9 +45,15 @@ class Handler(tornado.web.RequestHandler):
         
     def post(self):
         J = json.loads(self.request.body)
-        name = J["name"]
-        dob = J["dob"]
-        ppic = base64.b64decode(J["pic"])
-        print("WE GOT:", name, dob, ppic[:20])
+        if "name" in J:
+            data["name"][p] = J["name"]
+            print("WE GOT:", data["name"][p])
+        if "dob" in J:
+            data["dob"][p] = J["dob"]
+            print("WE GOT:", data["dob"][p])
+        if "pic" in J:
+            data["pfp"][p] = J["pic"]
+            ppic = base64.b64decode(J["pic"])
+            print("WE GOT:", ppic[:20])
         resp = {"ok": True}
         self.write(json.dumps(resp))
