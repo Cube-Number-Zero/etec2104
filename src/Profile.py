@@ -32,6 +32,20 @@ data = {
         "dave": "/static/davepfp.png"
     }
 }
+months = {
+    "01": "Jan. ",
+    "02": "Feb. ",
+    "03": "Mar. ",
+    "04": "Apr. ",
+    "05": "May ",
+    "06": "Jun. ",
+    "07": "Jul. ",
+    "08": "Aug. ",
+    "09": "Sep. ",
+    "10": "Oct. ",
+    "11": "Nov. ",
+    "12": "Dec. "
+}
 
 class Handler(tornado.web.RequestHandler):
     def get(self):
@@ -48,12 +62,14 @@ class Handler(tornado.web.RequestHandler):
         if "name" in J:
             data["name"][p] = J["name"]
             print("WE GOT:", data["name"][p])
+            resp = {"ok": True}
         if "dob" in J:
-            data["dob"][p] = J["dob"][5:]
+            data["dob"][p] = months[J["dob"][5:7]] + str(int(J["dob"][8:]))
             print("WE GOT:", data["dob"][p])
+            resp = {"new": data["dob"][p]}
         if "pic" in J:
             data["pfp"][p] = J["pic"]
             ppic = base64.b64decode(J["pic"])
             print("WE GOT:", ppic[:20])
-        resp = {"ok": True}
+            resp = {"ok": True}
         self.write(json.dumps(resp))

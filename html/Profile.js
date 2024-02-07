@@ -39,7 +39,7 @@ function submitDOB() {
         resp.json().then( (J) => {
             let dobDisplay = document.getElementById("dobDisplay");
             dobDisplay.removeChild(dobDisplay.firstChild);
-            dobDisplay.appendChild(document.createTextNode("DOB: " + dobText));
+            dobDisplay.appendChild(document.createTextNode("DOB: " + J["new"]));
             console.log("Server said:", J);
         });
     }).catch( (err) => {
@@ -50,10 +50,23 @@ function submitDOB() {
 function submitPicture() {
     let file = document.getElementById("profile_pic").files[0];
     let user = document.getElementById("username").value;
+    let img = document.getElementById("pfp");
     if (!file) {
         console.log("No file!");
         return;
     }
+    if(!file.type.startsWith("image/")) {
+        console.log("Not an image!");
+        return;
+    }
+    // Change the picture
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        img.src = e.target.result;
+        console.log(e.target.result);
+    };
+    reader.readAsDataURL(file);
+
     let R = new FileReader();
     R.addEventListener("load", () => {
         let profilepic = btoa(R.result);    //do base64 encoding

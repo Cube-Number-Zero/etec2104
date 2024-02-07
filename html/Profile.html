@@ -9,28 +9,29 @@
     <body>
         <table>
             <tr>
-                <td><img width=128px src={{pfp}} alt="Profile Picture"/></td>
+                <td><img id="pfp" width=128px src={{pfp}} alt="Profile Picture"/></td>
                 <td>
                     <p id="username">Username: {{user}}</p>
                     <p id="nameDisplay">Name: {{name}}</p>
                     <p id="dobDisplay">DOB: {{dob}}</p>
-                    <p>email: {{email}}</p></td>
+                    <p>email: {{email}}</p>
+                </td>
             </tr>
         </table>
         <table>
             <tr>
                 <td>Name: </td>
-                <td><input id="name"/></td>
+                <td><input id="name" /></td>
                 <td><button onclick="submitName()">Submit</button></td>
             </tr>
             <tr>
                 <td>DOB: </td>
-                <td><input id="dob" type="date"/></td>
+                <td><input id="dob" type="date" /></td>
                 <td><button onclick="submitDOB()">Submit</button></td>
             </tr>
             <tr>
                 <td>Profile Picture: </td>
-                <td><input id="profile_pic" type="file"></td>
+                <td><input id="profile_pic" type="file" /></td>
                 <td><button onclick="submitPicture()">Submit</button></td>
             </tr>
         </table>
